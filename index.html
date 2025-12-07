@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karate Judge & Diplomas Panel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">Karate Panel</div>
+      <nav class="nav">
+        <button class="nav-link active" data-target="judge"><span class="icon">⚖️</span> Дэшборд судьи</button>
+        <button class="nav-link" data-target="diploma"><span class="icon">📜</span> Дэшборд дипломщика</button>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="hamburger" id="hamburger">☰</button>
+        <h1 class="app-title">Karate Judge &amp; Diplomas Panel</h1>
+      </header>
+
+      <section class="view" id="judge-view">
+        <div class="card">
+          <h2>Дэшборд судьи</h2>
+          <div class="form-row">
+            <input id="competition-name" type="text" placeholder="Название соревнований" />
+            <button id="create-competition" class="btn primary">Создать соревнование</button>
+          </div>
+          <div id="competitions-list" class="cards-grid"></div>
+        </div>
+      </section>
+
+      <section class="view hidden" id="competition-view">
+        <div class="card">
+          <div class="breadcrumb" id="competition-breadcrumb"></div>
+          <div class="actions">
+            <button class="btn ghost" id="back-to-dashboard">← На дашборд</button>
+            <button class="btn primary" id="toggle-category-form">Добавить категорию</button>
+          </div>
+
+          <div class="collapsible hidden" id="category-form-wrapper">
+            <h3>Новая категория</h3>
+            <div class="form-grid">
+              <label>Название категории
+                <input type="text" id="category-name" />
+              </label>
+              <label>Тип таблицы
+                <select id="category-type">
+                  <option value="round-robin">Круговой (каждый с каждым)</option>
+                  <option value="olympic">Олимпийская система (4 участника)</option>
+                </select>
+              </label>
+              <label>Участники (каждый с новой строки)
+                <textarea id="category-participants" rows="5" placeholder="Участник 1\nУчастник 2\nУчастник 3"></textarea>
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn ghost" id="cancel-category">Отмена</button>
+              <button class="btn primary" id="create-category">Создать категорию</button>
+            </div>
+          </div>
+
+          <div id="categories-list" class="list"></div>
+        </div>
+      </section>
+
+      <section class="view hidden" id="category-view">
+        <div class="card">
+          <div class="breadcrumb" id="category-breadcrumb"></div>
+          <h2 id="category-title"></h2>
+          <p class="muted" id="category-system"></p>
+          <p class="muted"><strong>Участники:</strong> <span id="category-participants-list"></span></p>
+
+          <h3>Таблица боёв</h3>
+          <div class="table-wrapper">
+            <table id="matches-table">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Этап</th>
+                  <th>Участник 1</th>
+                  <th>Участник 2</th>
+                  <th>Счёт</th>
+                  <th>Победитель</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="next-match">Следующий бой</button>
+            <button class="btn success" id="show-results" disabled>Результаты</button>
+          </div>
+
+          <div class="collapsible hidden" id="current-match-panel">
+            <h3 id="current-match-title"></h3>
+            <p class="muted" id="current-match-stage"></p>
+            <div class="versus" id="current-match-fighters"></div>
+            <div class="form-grid">
+              <label id="score1-label">Очки</label>
+              <input type="number" id="score1-input" min="0" />
+              <label id="score2-label">Очки</label>
+              <input type="number" id="score2-input" min="0" />
+              <label>Кто победил?
+                <select id="winner-select"></select>
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" id="save-match">Сохранить бой</button>
+            </div>
+          </div>
+
+          <div class="collapsible hidden" id="results-panel">
+            <h3>Результаты</h3>
+            <ol id="results-list"></ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="view hidden" id="diploma-view">
+        <div class="card">
+          <h2>Дэшборд дипломщика</h2>
+          <p class="muted">Здесь отображаются категории, где все бои завершены. Выдайте дипломы и отметьте статус.</p>
+          <div id="diploma-cards" class="cards-grid"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
