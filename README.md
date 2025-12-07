@@ -1,0 +1,1 @@
+# karate-judging-app
